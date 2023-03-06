@@ -29,10 +29,10 @@ class GridWorldEnv(gym.Env):
         I.e. 0 corresponds to "right", 1 to "up" etc.
         """
         self._action_to_direction = {
-            0: np.array([1, 0]),
-            1: np.array([0, 1]),
-            2: np.array([-1, 0]),
-            3: np.array([0, -1]),
+            0: np.array([1, 0]),  # right
+            1: np.array([0, 1]),  # up
+            2: np.array([-1, 0]), # left
+            3: np.array([0, -1]), # down
         }
 
         assert render_mode is None or render_mode in self.metadata["render_modes"]
@@ -66,7 +66,8 @@ class GridWorldEnv(gym.Env):
         self._agent_location = self.np_random.integers(0, self.size, size=2, dtype=int)
 
         # We will sample the target's location randomly until it does not coincide with the agent's location
-        self._target_location = self._agent_location
+        # self._target_location = self._agent_location
+        self._target_location = np.array([0,0])
         while np.array_equal(self._target_location, self._agent_location):
             self._target_location = self.np_random.integers(
                 0, self.size, size=2, dtype=int
